@@ -1,27 +1,27 @@
 /* find the elements  ref: page 8*/
 
 /* start button*/
-// const startBtn =
+const startBtn = document.querySelector("#start");
 /* the element that hve the question-card class*/
-// const cardEle =
+const cardEle = document.querySelector(".question-card");
 
 /* the question title*/
-// const qTitleEle =
+const qTitleEle = document.querySelector("#question");
 /* the element with id of answers*/
-// const choicesEle =
+const choicesEle = document.querySelector("#answers");
 /* the next button*/
-// const nextBtn =
+const nextBtn = document.querySelector("#next");
 
 let currentQuestion, qIndex, score = 0, points = 10, maxPoints;
 
 /* function called when clicking on the start button*/
 function start() {
     /* show the questions card cardEle*/
-
+    cardEle.style.display = "block";
     /* hide the start button*/
-
+    startBtn.style.display = "none";
     /* set the maximum points a user can get for solving all the questions*/
-    // maxPoints =
+    maxPoints = questions.length * points;
     console.log('start function called');
     createQuestion();
 }
@@ -30,40 +30,46 @@ function createQuestion() {
     console.log('Creating question');
     /* randomly select a question from the questions array*/
     /* qIndex is the index of the question in the array*/
-    // qIndex =
-    // currentQuestion = questions[qIndex]
+    qIndex = Math.floor(Math.random() * questions.length);
 
-    // qTitleEle  /* fill the question title ref: slide 14*/
+    currentQuestion = questions[qIndex]
+
+    qTitleEle.innerHTML = currentQuestion.text;  /* fill the question title ref: slide 14*/
 
     /* remove the div that wraps all the answer buttons*/
-    // choicesEle /*ref: slide 15 and 23*/
+    choicesEle.removeChild(choicesEle.firstElementChild); /*ref: slide 15 and 23*/
 
     /* create a new div to wrap the choices*/
-    // let wrapper =
+    let wrapper = document.createElement("div");
     /* add all the choices to this wrapper*/
-    // currentQuestion.choices.forEach(choice => {
-    //     wrapper.appendChild(createChoice(choice))
-    // });
+    currentQuestion.choices.forEach(choice => {
+        wrapper.appendChild(createChoice(choice))
+    });
     /* add the wrapper to the choicesEle*/
-    // choicesEle
+    choicesEle.appendChild(wrapper);
     /* remove the selected question from the questions array so that it will not be shown again*/
-    // questions
+
+    for (let i = questions.length + 1; i != 0; i--) {
+        if (qIndex-- != 0) 
+            questions.push(questions[0]);
+        questions.shift();
+    }
 }
 
 /* function to create a button for each choice*/
 function createChoice(choice) {
     console.log('creating choice', choice);
     /* create a button element*/
-    // let element =
-    // element.classList.add("btn")
-    // element.innerText = choice.choice;
+    let element = document.createElement("button");
+    element.classList.add("btn")
+    element.innerText = choice.choice;
     /* create a data-correct attribute for the correct answer button*/
-    // if (choice.correct) {
-    //     element.dataset["correct"] = true
-    // }
+    if (choice.correct) {
+        element.dataset["correct"] = true
+    }
     /* add click event handler.*/
-    // element.addEventListener('click', answer)
-    // return element;
+    element.addEventListener('click', answer)
+    return element;
 }
 /* function to handle the click on an answer button*/
 function answer(source) {
@@ -71,15 +77,15 @@ function answer(source) {
     console.log('user choose ', src);
     if (src.dataset["correct"]) {
         /* add the 'correct' css class to both the button and the cardEle*/
-        // src
-        // cardEle
+        src.classList.add("correct");
+        cardEle.classList.add("correct");
         /* update the user score*/
-        // score
+        score += points;
     } else {
         /* add the 'incorrect' css class to both the button and the cardEle*/
 
-        // src
-        // cardEle
+        src.classList.add('incorrect');
+        cardEle.classList.add('incorrect');
     }
     proceed();
 }
@@ -98,7 +104,7 @@ function disableChoices() {
     const choicesBtns = document.querySelectorAll("button:not(.hide)");
     choicesBtns.forEach(btn => {
         /* remove the click event handler so the button does nothing when clicked*/
-        // btn
+        btn.removeEventListener('click', answer);
     });
 }
 
@@ -106,15 +112,19 @@ function disableChoices() {
 function showNext() {
     console.log('Show next button');
     /* remove the 'correct' and the 'incorrect' classes from the cardEle*/
-    // cardEle
-    // cardEle
+    cardEle.classList.remove('correct');
+    cardEle.classList.remove('incorrect');
     if (questions.length > 0) {
         /* remove the hide class from the nextBtn*/
-        // nextBtn
+        nextBtn.classList.remove('hide');
     }
     else {
         /* show the score*/
-        //  = `Done! your score is ${score} / ${maxPoints}`
+        qTitleEle.innerHTML = `Done! your score is ${score} / ${maxPoints}`
+        // He didn't specifiy what to change, so I changed the title
+
+        // Below code is added by me to remove the buttons when the game finishes
+        choicesEle.removeChild(choicesEle.firstElementChild);
     }
 }
 
