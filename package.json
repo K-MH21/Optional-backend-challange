@@ -1,0 +1,19 @@
+{
+  "name": "optional-backend-challange",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K-MH21/Optional-backend-challange.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/K-MH21/Optional-backend-challange/issues"
+  },
+  "homepage": "https://github.com/K-MH21/Optional-backend-challange#readme"
+}
