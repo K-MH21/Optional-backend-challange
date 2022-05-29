@@ -63,3 +63,28 @@ h1{
 .incorrect{
     background-color: rgb(197, 74, 74);
 }
+
+#formInputs {
+    display: flex;
+    height: 260px;
+    width: 250px;
+    flex-wrap: wrap;
+}
+
+#formInputs input {
+    width: 55%;
+    margin: auto;
+}
+
+#formInputs label {
+    width: 100px;
+}
+
+#formInputs label:not(label:first-child) {
+    position: relative;
+    top: 12px;
+}
+
+label {
+    font-size: 15px
+}

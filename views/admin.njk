@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Page</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1> {{ message }} </h1>
+        {% if getRequest %}
+            <div class="question-card">
+                <form action = "http://localhost:8080/admin" method = "POST">
+                    <div id = "formInputs">
+                        <label for ="text"> Question TEXT: </label>
+                        <textarea id="text" name = "text" rows="1" cols="17" required></textarea>
+                        <br> <br>
+                        <label for = "choice1"> Choice 1: </label>
+                        <input type = "input" id = "choice1" name = "choice1" required>
+                        <br>
+                        <label for = "choice2"> Choice 2: </label>
+                        <input type = "input" id = "choice2" name = "choice2" required>
+                        <br>
+                        <label for = "choice3"> Choice 3: </label>
+                        <input type = "input" id = "choice3" name = "choice3" required>
+                        <br>
+                        <label for = "choice4"> Choice 4: </label>
+                        <input type = "input" id = "choice4" name = "choice4" required>
+                        <br>
+                        <label for = "answerIndex"> Answer index </label>
+                        <input type = "input" id = "answerIndex" name = "answerIndex" value = "1" reqiured>
+                        <br>
+                    </div>
+                    <button type = "submit" class="btn"> Submit </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

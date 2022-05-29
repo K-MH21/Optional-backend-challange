@@ -1,7 +1,16 @@
 import express from 'express';
-import {getQuestions, addQuestion, getScores, checkAnswer, addScore} from "./models/QuizController.js";
+import nunjucks from 'nunjucks';
+import adminRouter from './route/admin.js'
 
-//const app = express();
+const app = express();
+app.set("view engine", "njk");
+nunjucks.configure("views", {
+    express: app,
+})
 
-//console.log(checkAnswer({"id": 2, "answer": 4}));
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use("/admin", adminRouter)
 
+app.listen(8080);
