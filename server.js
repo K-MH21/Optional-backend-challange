@@ -2,6 +2,7 @@ import express from 'express';
 import nunjucks from 'nunjucks';
 import adminRouter from './route/admin.js'
 import questionsRouter from "./route/questions_api.js"
+import scoresRouter from "./route/socres_api.js"
 
 const app = express();
 app.set("view engine", "njk");
@@ -15,5 +16,6 @@ app.use(express.json());
 
 app.use("/admin", adminRouter)
 app.use("/questions_api", questionsRouter)
+app.use("scores_api", scoresRouter)
 
 app.listen(8080);
