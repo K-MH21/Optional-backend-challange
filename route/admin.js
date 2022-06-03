@@ -1,6 +1,6 @@
 import express from'express';
 import {body, validationResult} from 'express-validator';
-import {getQuestions, addQuestion, getScores, checkAnswer, addScore} from "./../models/QuizController.js";
+import {addQuestion} from "./../models/QuizController.js";
 
 const adminRouter = express.Router();
 
