@@ -24,6 +24,10 @@ function start() {
     maxPoints = questions.length * points;
     console.log('start function called');
     createQuestion();
+
+    // Hide the button and show the questions
+    document.querySelector("#name").style.display = "none";
+    document.querySelector("#answers").style.display = "block";
 }
 
 function createQuestion() {
